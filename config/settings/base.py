@@ -48,6 +48,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Наши приложения
+    'apps.locations',
+    'apps.vacancies',
+    'apps.services',
+    'apps.stop_locations',
+    'apps.promotions',
+    'apps.bookings',
+    'apps.responses',
+    'apps.reviews',
+    'apps.announcements',
 ]
 
 MIDDLEWARE = [

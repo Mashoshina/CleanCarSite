@@ -3,7 +3,6 @@ from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils.text import slugify
 
-
 class Vacancy(models.Model):
     """Вакансия сети автомоек CleanCar."""
 
