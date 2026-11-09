@@ -5,10 +5,6 @@ from django.db import models
 class Announcement(models.Model):
     """Объявление."""
 
-    class ActiveStatus(models.IntegerChoices):
-        ACTIVE = 0, "Активно"
-        INACTIVE = 1, "Не активно"
-
     title = models.CharField(
         max_length=200,
         verbose_name="Заголовок",
@@ -16,10 +12,9 @@ class Announcement(models.Model):
     content = models.TextField(
         verbose_name="Суть",
     )
-    status = models.PositiveSmallIntegerField(
-        choices=ActiveStatus.choices,
-        default=ActiveStatus.ACTIVE,
-        verbose_name="Статус",
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name="Активно",
     )
 
     def __str__(self):

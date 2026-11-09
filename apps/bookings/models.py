@@ -7,9 +7,9 @@ from apps.locations.models import Location
 class Booking(models.Model):
     """Бронь на посещение точки автомойки."""
 
-    class BookingType(models.IntegerChoices):
-        SELF_SERVICE = 0, "Самообслуживание"
-        STAFF_SERVICE = 1, "Обслуживание персоналом"
+    class BookingType(models.TextChoices):
+        SELF_SERVICE = "self_service", "Самообслуживание"
+        STAFF_SERVICE = "staff_service", "Обслуживание персоналом"
 
     class ConfirmationStatus(models.TextChoices):
         CONFIRMED = "Y", "Подтверждено"
@@ -28,9 +28,9 @@ class Booking(models.Model):
     client_phone = models.CharField(
         max_length=20,
         validators=[
-            RegexValidator(
-                regex=r"^\+?[0-9\s\-\(\)]+$",
-                message="Телефон должен содержать только цифры, пробелы, +, -, ()",
+           RegexValidator(
+                regex=r"^\+7\d{10}$",
+                message="Укажите номер в формате +7XXXXXXXXXX.",
             )
         ],
         verbose_name="Телефон клиента",
@@ -41,7 +41,8 @@ class Booking(models.Model):
     booking_time = models.TimeField(
         verbose_name="Время",
     )
-    booking_type = models.PositiveSmallIntegerField(
+    booking_type = models.CharField(
+        max_length=20,
         choices=BookingType.choices,
         verbose_name="Тип",
     )

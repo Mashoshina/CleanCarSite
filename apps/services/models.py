@@ -7,9 +7,9 @@ from django.utils.text import slugify
 class Service(models.Model):
     """Услуга сети автомоек CleanCar."""
 
-    class ServiceType(models.IntegerChoices):
-        SELF_SERVICE = 0, "Самообслуживание"
-        STAFF_SERVICE = 1, "Обслуживание персоналом"
+    class ServiceType(models.TextChoices):
+        SELF_SERVICE = "self_service", "Самообслуживание"
+        STAFF_SERVICE = "staff_service", "Обслуживание персоналом"
 
     class VehicleType(models.TextChoices):
         PASSENGER_CAR = "pass", "Легковое авто"
@@ -25,12 +25,13 @@ class Service(models.Model):
         validators=[MinValueValidator(0)],
         verbose_name="Цена",
     )
-    service_type = models.PositiveSmallIntegerField(
+    service_type = models.CharField(
+        max_length=20,
         choices=ServiceType.choices,
         verbose_name="Тип услуги",
     )
     vehicle_type = models.CharField(
-        max_length=5,
+        max_length=20,
         choices=VehicleType.choices,
         verbose_name="Тип транспортного средства",
     )

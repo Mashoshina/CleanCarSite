@@ -32,6 +32,8 @@ class Vacancy(models.Model):
         choices=Experience.choices,
         verbose_name="Опыт работы",
     )
+    description = models.TextField(
+        verbose_name="Описание")
     requirements = models.TextField(
         verbose_name="Требования",
     )
