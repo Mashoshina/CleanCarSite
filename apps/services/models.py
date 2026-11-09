@@ -7,6 +7,14 @@ from django.utils.text import slugify
 class Service(models.Model):
     """Услуга сети автомоек CleanCar."""
 
+    class ServiceType(models.IntegerChoices):
+        SELF_SERVICE = 0, "Самообслуживание"
+        STAFF_SERVICE = 1, "Обслуживание персоналом"
+
+    class VehicleType(models.TextChoices):
+        PASSENGER_CAR = "pass", "Легковое авто"
+        TRUCK = "truck", "Грузовое авто"
+
     name = models.CharField(
         max_length=150,
         verbose_name="Название услуги",
@@ -17,12 +25,13 @@ class Service(models.Model):
         validators=[MinValueValidator(0)],
         verbose_name="Цена",
     )
-    service_type = models.CharField(
-        max_length=100,
+    service_type = models.PositiveSmallIntegerField(
+        choices=ServiceType.choices,
         verbose_name="Тип услуги",
     )
     vehicle_type = models.CharField(
-        max_length=100,
+        max_length=5,
+        choices=VehicleType.choices,
         verbose_name="Тип транспортного средства",
     )
     slug = models.SlugField(

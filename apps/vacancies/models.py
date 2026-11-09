@@ -35,6 +35,9 @@ class Vacancy(models.Model):
     requirements = models.TextField(
         verbose_name="Требования",
     )
+    conditions = models.TextField(
+        verbose_name="Условия работы",
+    )
     has_night_shifts = models.BooleanField(
         default=False,
         verbose_name="Ночные смены",
