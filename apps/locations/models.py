@@ -1,4 +1,3 @@
-
 from django.core.validators import (
     MaxValueValidator,
     MinValueValidator,
