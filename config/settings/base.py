@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Наши приложения
+    "rest_framework",
     'apps.locations',
     'apps.vacancies',
     'apps.services',
