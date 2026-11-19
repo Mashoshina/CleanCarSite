@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Наши точки — CleanCar{% endblock %}
+
+{% block content %}
+<section class="locations-page">
+    <div class="locations-heading">
+        <h1>Наши точки</h1>
+        <p>Выберите подходящую автомойку CleanCar.</p>
+    </div>
+
+    <div class="location-filters" aria-label="Фильтр формата мойки">
+        <button class="filter-button active" type="button" data-location-type="">
+            Все точки
+        </button>
+        <button class="filter-button" type="button" data-location-type="self_service">
+            Самообслуживание
+        </button>
+        <button class="filter-button" type="button" data-location-type="staff_service">
+            Обслуживание сотрудниками
+        </button>
+    </div>
+
+    <div class="locations-grid">
+        {% for location in locations %}
+            <article class="location-card" data-location-type="{{ location.location_type }}">
+                <div class="location-card__type">
+                    {{ location.get_location_type_display }}
+                </div>
+
+                <h2>{{ location.address }}</h2>
+
+                <p class="location-card__phone">
+                    <span>Телефон:</span>
+                    <a href="tel:{{ location.phone }}">{{ location.phone }}</a>
+                </p>
+
+                <a class="location-card__button"
+                   href="{% url 'location-detail' location.slug %}">
+                    Подробнее
+                </a>
+            </article>
+        {% empty %}
+            <p class="locations-empty">
+                Активных точек пока нет.
+            </p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

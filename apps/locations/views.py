@@ -9,6 +9,8 @@ from .serializers import LocationSerializer
 from .selectors import search_locations
 from .serializers import LocationSuggestionSerializer
 
+from django.shortcuts import render
+
 
 class LocationListView(APIView):
     """Список активных точек для карты."""
@@ -35,7 +37,6 @@ class LocationListView(APIView):
 
         locations = list_active_locations(
             location_type=location_type,
-            query=query,
         )
         serializer = LocationSerializer(locations, many=True)
 
@@ -75,3 +76,12 @@ class LocationSearchView(APIView):
         serializer = LocationSuggestionSerializer(locations, many=True)
 
         return Response(serializer.data)
+    
+def locations_page(request):
+    locations = list_active_locations()
+
+    return render(
+        request,
+        "locations.html",
+        {"locations": locations},
+    )
