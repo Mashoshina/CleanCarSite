@@ -9,3 +9,6 @@ venv/
 
 # Local databases
 *.sqlite3
+
+__pycache__/
+*.py[cod]

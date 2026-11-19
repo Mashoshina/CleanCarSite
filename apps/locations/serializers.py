@@ -27,3 +27,8 @@ class LocationSerializer(serializers.ModelSerializer):
             ]
 
         return [location.location_type]
+    
+class LocationSuggestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Location
+        fields = ("id", "slug", "address")
