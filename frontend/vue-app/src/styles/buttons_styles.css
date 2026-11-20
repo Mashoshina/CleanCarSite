@@ -1,0 +1,111 @@
+/* Общие настройки кнопок */
+.text-button,
+.general-button,
+.bright-button,
+.hyperlink {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        text-decoration-color 0.2s ease;
+}
+
+/* Кнопка-ссылка без фона и рамки */
+.text-button {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--charcoal);
+}
+
+.text-button:hover,
+.text-button:active {
+    color: var(--burgundi);
+}
+
+/* Обычная контурная кнопка */
+.general-button {
+    padding: 8px 16px;
+    border: 2px solid var(--burgundi);
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: var(--burgundi);
+}
+
+.general-button:hover,
+.general-button:active {
+    border-color: var(--burgundi);
+    background-color: var(--burgundi);
+    color: #ffffff;
+}
+
+/* Акцентная кнопка */
+.bright-button {
+    padding: 8px 16px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    background-color: var(--burgundi);
+    color: #ffffff;
+}
+
+.bright-button:hover,
+.bright-button:active {
+    /* Темнее исходного #910029 примерно на 10% */
+    background-color: #820025;
+    border-color: #820025;
+}
+
+/* Гиперссылка */
+.hyperlink {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--burgundi);
+}
+
+.hyperlink:hover,
+.hyperlink:active {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+}
+
+/* Видимый фокус для управления клавиатурой */
+.text-button:focus-visible,
+.general-button:focus-visible,
+.bright-button:focus-visible,
+.hyperlink:focus-visible {
+    outline: 2px solid var(--charcoal);
+    outline-offset: 3px;
+}
+
+/* Состояние недоступной кнопки */
+.text-button:disabled,
+.general-button:disabled,
+.bright-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Мобильные размеры */
+@media (max-width: 767px) {
+    .text-button,
+    .general-button,
+    .bright-button,
+    .hyperlink {
+        gap: 4px;
+    }
+
+    .general-button,
+    .bright-button {
+        padding: 4px 8px;
+        border-radius: 4px;
+    }
+}
