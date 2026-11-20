@@ -7,57 +7,52 @@
 .big-header-1 {
     font-size: 64px;
     font-weight: 700;
-    line-height: normal;
+    line-height: 1.5;
 }
 
 .big-header-2 {
     font-size: 36px;
-    font-weight: 700;
-    line-height: normal;
+    font-weight: 800;
+    line-height: 1.5;
 }
 
 .header {
     font-size: 32px;
-    font-weight: 700;
-    line-height: normal;
+    font-weight: 800;
+    line-height: 1.5;
 }
 
 .aheader {
     font-size: 24px;
-    font-weight: 500;
-    line-height: normal;
+    font-weight: 800;
+    line-height: 1.5;
 }
 
-.basic-text {
+.basic {
     font-size: 16px;
-    font-weight: 400;
-    line-height: normal;
+    font-weight: 600;
+    line-height: 1.5;
 }
 
 /* Мобильные стили */
 @media (max-width: 767px) {
     .big-header-1 {
         font-size: 36px;
-        font-weight: 600;
     }
 
     .big-header-2 {
         font-size: 32px;
-        font-weight: 600;
     }
 
     .header {
         font-size: 24px;
-        font-weight: 600;
     }
 
     .aheader {
         font-size: 16px;
-        font-weight: 500;
     }
 
     .basic-text {
         font-size: 12px;
-        font-weight: 400;
     }
 }

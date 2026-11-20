@@ -7,9 +7,9 @@ const menuItems = [
   { label: 'Главная', href: '#home' },
   { label: 'Услуги', href: '#services' },
   { label: 'Отзывы', href: '#reviews' },
-  { label: 'Скидки', href: '#discounts' },
+  /* { label: 'Скидки', href: '#discounts' },
   { label: 'Акции', href: '#promotions' },
-  { label: 'О нас', href: '#about' },
+  { label: 'О нас', href: '#about' },*/
 ]
 
 const socialLinks = [
@@ -79,9 +79,9 @@ function closeMenu() {
         </svg>
       </button>
 
-      <a class="big-header-1 site-hat__logo" href="/" @click="closeMenu">
+      <span class="big-header-2"@click="closeMenu">
         CleanCar
-      </a>
+      </span>
 
       <nav class="site-hat__desktop-menu" aria-label="Основная навигация">
         <a
@@ -90,7 +90,7 @@ function closeMenu() {
           class="text-button"
           :href="item.href"
         >
-          {{ item.label }}
+          <span class="basic">{{ item.label }}</span>
         </a>
       </nav>
 
@@ -130,7 +130,7 @@ function closeMenu() {
             :href="item.href"
             @click="closeMenu"
           >
-            {{ item.label }}
+            <span class="basic">{{ item.label }}</span>
           </a>
         </div>
 
@@ -153,6 +153,7 @@ function closeMenu() {
 </template>
 
 <style scoped>
+
 .site-hat {
   position: sticky;
   z-index: 20;
@@ -162,26 +163,25 @@ function closeMenu() {
 }
 
 .site-hat__bar {
-  position: relative;
-  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
   width: 100%;
-  padding: 24px 80px;
+  padding: 24px clamp(16px, 5.56vw, 80px);
   border-bottom: 2px solid #000;
-  background-color: var(--alice-blue);
+  background: var(--alice-blue);
 }
 
 .site-hat__logo {
   flex: 0 0 auto;
-  color: var(--charcoal);
+  color: inherit;
   text-decoration: none;
 }
 
 .site-hat__desktop-menu,
-.site-hat__desktop-socials {
+.site-hat__desktop-socials,
+.site-hat__mobile-socials {
   display: flex;
   align-items: center;
 }
@@ -190,7 +190,8 @@ function closeMenu() {
   gap: 48px;
 }
 
-.site-hat__desktop-socials {
+.site-hat__desktop-socials,
+.site-hat__mobile-socials {
   gap: 16px;
 }
 
@@ -201,50 +202,14 @@ function closeMenu() {
   object-fit: contain;
 }
 
-.site-hat__menu-toggle {
+.site-hat__menu-toggle,
+.site-hat__mobile-panel,
+.site-hat__backdrop {
   display: none;
 }
 
-.site-hat__backdrop {
-  position: fixed;
-  z-index: 1;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-  background: rgb(0 0 0 / 45%);
-  cursor: default;
-}
 
-.site-hat__mobile-panel {
-  position: absolute;
-  z-index: 2;
-  top: 100%;
-  left: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 128px;
-  width: max-content;
-  max-width: 100%;
-  padding: 16px 24px;
-  background-color: var(--alice-blue);
-}
-
-.site-hat__mobile-menu {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 16px;
-}
-
-.site-hat__mobile-socials {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-@media (max-width: 767px) {
+@media (max-width: 1100px) {
   .site-hat__bar {
     justify-content: flex-start;
     gap: 16px;
@@ -264,23 +229,43 @@ function closeMenu() {
   .site-hat__desktop-socials {
     display: none;
   }
-}
 
-@media (min-width: 768px) {
-  .site-hat__mobile-panel,
   .site-hat__backdrop {
-    display: none;
+    position: fixed;
+    z-index: 1;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: rgb(0 0 0 / 45%);
   }
-}
 
-@media (max-width: 360px) {
-  .site-hat__bar {
-    padding-right: 16px;
-    padding-left: 16px;
+  .site-hat__mobile-panel {
+    position: absolute;
+    z-index: 2;
+    top: 100%;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 128px;
+    width: min(320px, 100vw);
+    max-height: calc(100dvh - 80px);
+    overflow-y: auto;
+    padding: 16px 24px;
+    background: var(--alice-blue);
   }
 
-  .site-hat__logo {
-    font-size: 30px;
+  .site-hat__mobile-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .site-hat__mobile-socials {
+    display: flex;
   }
 }
 </style>

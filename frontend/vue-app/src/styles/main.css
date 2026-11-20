@@ -2,3 +2,13 @@
 @import url("./text_styles.css");
 @import url("./buttons_styles.css");
 @import url("./forms_styles.css");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
