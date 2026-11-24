@@ -32,6 +32,7 @@
 
 /* Обычная контурная кнопка */
 .general-button {
+    width: 100%;
     padding: 8px 16px;
     border: 2px solid var(--burgundi);
     border-radius: 8px;
@@ -48,6 +49,7 @@
 
 /* Акцентная кнопка */
 .bright-button {
+    width: 100%;
     padding: 8px 16px;
     border: 2px solid transparent;
     border-radius: 8px;

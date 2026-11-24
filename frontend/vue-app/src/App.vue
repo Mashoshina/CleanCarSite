@@ -1,6 +1,9 @@
 <script setup>
 import { onMounted, ref } from 'vue'
+import { RouterView } from 'vue-router'
 import SiteHat from './components/SiteHat.vue'
+import SiteFooter from './components/SiteFooter.vue'
+
 
 const locations = ref([])
 const isLoading = ref(true)
@@ -24,18 +27,13 @@ onMounted(async () => {
 </script>
 
 <template>
-  <SiteHat />
-  <main>
-    <h1>Доступные точки CleanCar</h1>
+  <div class="page">
+    <SiteHat />
 
-    <p v-if="isLoading">Загружаем адреса…</p>
-    <p v-else-if="error">{{ error }}</p>
-    <p v-else-if="locations.length === 0">Активных точек пока нет.</p>
+    <main class="page__content">
+      <RouterView />
+    </main>
 
-    <ul v-else>
-      <li v-for="location in locations" :key="location.id">
-        {{ location.address }}
-      </li>
-    </ul>
-  </main>
+    <SiteFooter />
+  </div>
 </template>

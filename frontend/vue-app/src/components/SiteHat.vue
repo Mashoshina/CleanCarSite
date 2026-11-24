@@ -1,15 +1,13 @@
 <script setup>
 import { ref } from 'vue'
+import { RouterLink } from 'vue-router'
 
 const isMenuOpen = ref(false)
 
 const menuItems = [
-  { label: 'Главная', href: '#home' },
-  { label: 'Услуги', href: '#services' },
-  { label: 'Отзывы', href: '#reviews' },
-  /* { label: 'Скидки', href: '#discounts' },
-  { label: 'Акции', href: '#promotions' },
-  { label: 'О нас', href: '#about' },*/
+  { label: 'Главная', to: '/' },
+  { label: 'Услуги', to: '#services' },
+  { label: 'Отзывы', to: '#reviews' }
 ]
 
 const socialLinks = [
@@ -79,19 +77,20 @@ function closeMenu() {
         </svg>
       </button>
 
-      <span class="big-header-2"@click="closeMenu">
+      <RouterLink class="big-header-2 site-hat__logo" to="/" @click="closeMenu">
         CleanCar
-      </span>
+      </RouterLink>
 
       <nav class="site-hat__desktop-menu" aria-label="Основная навигация">
-        <a
+        <RouterLink
           v-for="item in menuItems"
           :key="item.label"
           class="text-button"
-          :href="item.href"
+          :to="item.to"
+          @click="closeMenu"
         >
           <span class="basic">{{ item.label }}</span>
-        </a>
+        </RouterLink>
       </nav>
 
       <div class="site-hat__desktop-socials" aria-label="Социальные сети">
@@ -123,15 +122,15 @@ function closeMenu() {
         aria-label="Основная навигация"
       >
         <div class="site-hat__mobile-menu">
-          <a
+          <RouterLink
             v-for="item in menuItems"
             :key="item.label"
             class="text-button"
-            :href="item.href"
+            :to="item.to"
             @click="closeMenu"
           >
             <span class="basic">{{ item.label }}</span>
-          </a>
+          </RouterLink>
         </div>
 
         <div class="site-hat__mobile-socials" aria-label="Социальные сети">
