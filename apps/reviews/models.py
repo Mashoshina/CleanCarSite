@@ -7,7 +7,7 @@ class Review(models.Model):
     """Отзыв клиента."""
 
     rating = models.PositiveSmallIntegerField(
-        validators=[MinValueValidator(0), MaxValueValidator(5)],
+        validators=[MinValueValidator(1), MaxValueValidator(5)],
         verbose_name="Рейтинг",
     )
     name = models.CharField(

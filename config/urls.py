@@ -27,4 +27,5 @@ urlpatterns = [
     path("api/content/", include("apps.site_content.urls")),
     path("api/services/", include("apps.services.urls")),
     path("api/bookings/", include("apps.bookings.urls")),
+    path("api/reviews/", include("apps.reviews.urls")),
 ]
