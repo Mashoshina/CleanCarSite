@@ -6,8 +6,8 @@ const isMenuOpen = ref(false)
 
 const menuItems = [
   { label: 'Главная', to: '/' },
-  { label: 'Услуги', to: '#services' },
-  { label: 'Отзывы', to: '#reviews' }
+  { label: 'Услуги', to: '/services' },
+  { label: 'Отзывы', to: '/reviews' }
 ]
 
 const socialLinks = [

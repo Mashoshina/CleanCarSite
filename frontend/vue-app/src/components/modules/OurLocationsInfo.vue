@@ -323,6 +323,7 @@ onBeforeUnmount(() => {
   min-height: 0;
   aspect-ratio: 16 / 9;
   align-self: flex-start;
+  z-index: 19;
 }
 
 .locations-times {
