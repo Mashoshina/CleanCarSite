@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { computed, onBeforeUnmount, ref } from 'vue'
 
 const emit = defineEmits(['close', 'created'])
 
@@ -12,6 +12,12 @@ const errors = ref({})
 const requestError = ref('')
 const successMessage = ref('')
 
+const hasRequiredErrors = computed(
+  () => submitted.value && (!name.value.trim() || !rating.value),
+)
+
+let successTimer = null
+
 function chooseRating(value) {
   rating.value = value
   errors.value.rating = ''
@@ -21,7 +27,6 @@ async function submitReview() {
   submitted.value = true
   errors.value = {}
   requestError.value = ''
-  successMessage.value = ''
 
   if (!name.value.trim()) {
     errors.value.name = 'Заполните это поле'
@@ -60,7 +65,13 @@ async function submitReview() {
     }
 
     emit('created', result)
+
     successMessage.value = 'Спасибо за Ваш отзыв! :)'
+    clearTimeout(successTimer)
+    successTimer = setTimeout(() => {
+      successMessage.value = ''
+    }, 4000)
+
     name.value = ''
     rating.value = 0
     comment.value = ''
@@ -74,6 +85,10 @@ async function submitReview() {
     isSubmitting.value = false
   }
 }
+
+onBeforeUnmount(() => {
+  clearTimeout(successTimer)
+})
 </script>
 
 <template>
@@ -85,6 +100,7 @@ async function submitReview() {
       class="overlay-form"
       role="dialog"
       aria-modal="true"
+      novalidate
       @submit.prevent="submitReview"
     >
       <div class="table-string">
@@ -114,9 +130,14 @@ async function submitReview() {
         </button>
       </div>
 
-      <span class="basic">
-        * — обязательные поля
-      </span>
+        <span
+            class="basic"
+            :style="{
+                color: hasRequiredErrors ? 'var(--burgundi)' : 'var(--charcoal)',
+            }"
+        >
+            * — обязательные поля
+        </span>
 
       <div class="content-block-vertical">
         <span class="aheader" style="color: var(--charocal)">Ваше имя*:</span>
@@ -129,7 +150,11 @@ async function submitReview() {
           required
           @input="errors.name = ''"
         />
-        <span v-if="errors.name" class="basic" style="color: var(--burgundi)" role="alert">
+        <span
+          v-if="errors.name"
+          class="basic review-form__error"
+          role="alert"
+        >
           {{ errors.name }}
         </span>
     </div>
@@ -178,14 +203,14 @@ async function submitReview() {
         {{ requestError }}
       </p>
 
-      <span
-        v-if="successMessage"
-        class="basic"
-        role="status"
-        aria-live="polite"
-      >
-        {{ successMessage }}
-      </span>
+      <div
+      v-if="successMessage"
+      class="review-form__toast basic"
+      role="status"
+      aria-live="polite"
+    >
+      {{ successMessage }}
+    </div>
 
       <button
         class="bright-button"
@@ -219,6 +244,25 @@ async function submitReview() {
 
 .review-form__field {
   width: 100%;
+}
+
+.review-form__toast {
+  position: fixed;
+  z-index: 1200;
+  right: 24px;
+  bottom: 24px;
+  max-width: min(420px, calc(100vw - 32px));
+  padding: 16px 24px;
+  border: 2px solid var(--charcoal);
+  border-radius: 12px;
+  background: var(--alice-blue);
+  color: var(--charcoal);
+  box-shadow: 0 4px 16px rgb(0 0 0 / 20%);
+}
+
+.review-form__error {
+  margin: 0;
+  color: var(--burgundi);
 }
 
 .review-form__input {

@@ -13,11 +13,7 @@
       <div class="basic" style="color: var(--charcoal)">Эл. почта: ooo_cleancar@gmail.com</div>
     </div>
 
-    <nav class="content-block-vertical" aria-label="Навигация в подвале">
-      <a class="text-button" href="#home"> <span class="basic">Главная</span></a>
-      <a class="text-button" href="#services"> <span class="basic">Услуги</span></a>
-      <a class="text-button" href="#reviews"> <span class="basic">Отзывы</span></a>
-    </nav>
+    
 
       <div class="basic" style="color: var(--charcoal)">© Сеть автомоек «CleanCar» 2026</div>
   </footer>

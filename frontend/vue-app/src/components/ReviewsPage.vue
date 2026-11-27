@@ -28,6 +28,6 @@ function handleReviewSubmitted() {
   <ReviewForm
     v-if="isReviewFormOpen"
     @close="isReviewFormOpen = false"
-    @submitted="handleReviewSubmitted"
+    @created="handleReviewSubmitted"
   />
 </template>
