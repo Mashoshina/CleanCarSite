@@ -1,3 +1,4 @@
+from rest_framework import status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -28,7 +29,17 @@ class ReviewListView(APIView):
                 return Response(
                     {"limit": "Укажите целое положительное число."},
                     status=400,
-                )
+                )    
 
         reviews = list_reviews(limit=limit)
         return Response(ReviewSerializer(reviews, many=True).data)
+    
+    def post(self, request):
+        serializer = ReviewSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        review = serializer.save()
+
+        return Response(
+            ReviewSerializer(review).data,
+            status=status.HTTP_201_CREATED,
+        )
